@@ -3,9 +3,874 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola Mundo</title>
+    <title>Lucía López | Colección Hombre & Moda Urbana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --gray-light: #f4f4f4;
+            --gray-medium: #888888;
+            --accent: #000000;
+            --border-color: #e5e5e5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Barra superior promocional */
+        .promo-bar {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1px;
+            padding: 8px 16px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Navegación Principal */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #000;
+        }
+
+        .brand-logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 26px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #000;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-box {
+            border-bottom: 1px solid #000;
+            padding-bottom: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 12px;
+            width: 130px;
+            font-family: inherit;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #000;
+        }
+
+        /* Hero Banner Editorial */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 78vh;
+            background-color: #111;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: 48px;
+        }
+
+        .hero img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: transform 0.8s ease;
+        }
+
+        .hero:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            max-width: 600px;
+        }
+
+        .hero-tag {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: #fff;
+            color: #000;
+            padding: 4px 10px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(36px, 5vw, 64px);
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: #fff;
+            color: #000;
+            padding: 14px 32px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .hero-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        /* Barra de Categorías / Filtros */
+        .categories-bar {
+            padding: 24px 32px;
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--border-color);
+            scrollbar-width: none;
+        }
+
+        .categories-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cat-pill {
+            padding: 8px 18px;
+            border: 1px solid #000;
+            background: transparent;
+            color: #000;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .cat-pill.active, .cat-pill:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        /* Grid de Productos */
+        .section-header {
+            padding: 32px 32px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .section-header h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        .item-count {
+            font-size: 12px;
+            color: var(--gray-medium);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background-color: #fff;
+            padding: 0 32px 64px;
+        }
+
+        .product-card {
+            position: relative;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 24px;
+        }
+
+        .product-img-wrapper {
+            position: relative;
+            aspect-ratio: 3 / 4;
+            background-color: var(--gray-light);
+            overflow: hidden;
+        }
+
+        .product-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img-wrapper img {
+            transform: scale(1.04);
+        }
+
+        .badge-new {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #fff;
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 7px;
+            text-transform: uppercase;
+        }
+
+        .quick-add {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
+            border: 1px solid #000;
+            padding: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.25s ease;
+        }
+
+        .product-card:hover .quick-add {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quick-add:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .product-info {
+            padding: 10px 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .product-title {
+            font-size: 12px;
+            font-weight: 400;
+            color: #111;
+            line-height: 1.3;
+        }
+
+        .product-price {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* Banner Editorial Intermedio */
+        .editorial-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin: 0 32px 64px;
+            background: #000;
+            color: #fff;
+        }
+
+        .editorial-split img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .editorial-text {
+            padding: 64px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .editorial-text h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 36px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .editorial-text p {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        /* Carrito Lateral (Drawer) */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 200;
+            display: none;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 380px;
+            height: 100vh;
+            background: #fff;
+            z-index: 201;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid #000;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            font-size: 12px;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #000;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 64px 32px 32px;
+            background: #fafafa;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .footer-col h4 {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            text-decoration: none;
+            color: #555;
+            font-size: 12px;
+        }
+
+        .footer-col a:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        .newsletter-form {
+            display: flex;
+            border-bottom: 1px solid #000;
+            padding-bottom: 6px;
+        }
+
+        .newsletter-form input {
+            border: none;
+            background: transparent;
+            outline: none;
+            flex: 1;
+            font-size: 12px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #777;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .editorial-split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 14px 16px;
+            }
+            .nav-links, .search-box {
+                display: none;
+            }
+            .brand-logo {
+                position: static;
+                transform: none;
+                font-size: 20px;
+            }
+            .hero {
+                height: 60vh;
+                padding: 24px;
+            }
+            .product-grid {
+                padding: 0 16px 32px;
+                gap: 8px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hola mundo</h1>
+
+    <div class="promo-bar">
+        Envío estándar gratuito en pedidos superiores a 40 € · Devoluciones gratis en 30 días
+    </div>
+
+    <header>
+        <div class="nav-left">
+            <ul class="nav-links">
+                <li><a href="#" class="active">Hombre</a></li>
+                <li><a href="#">Mujer</a></li>
+                <li><a href="#">Streetwear</a></li>
+                <li><a href="#">Novedades</a></li>
+            </ul>
+        </div>
+
+        <a href="#" class="brand-logo">Lucía López</a>
+
+        <div class="nav-right">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="BUSCAR..." onkeyup="filterProducts()">
+            </div>
+            <button class="icon-btn">Iniciar sesión</button>
+            <button class="icon-btn" onclick="toggleCart()">Cesta (<span id="cartCount">0</span>)</button>
+        </div>
+    </header>
+
+    <!-- Hero Principal -->
+    <section class="hero">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1800&q=80" alt="Nueva Colección Lucía López">
+        <div class="hero-content">
+            <span class="hero-tag">New Drop · FW26</span>
+            <h1 class="hero-title">Urban Utility & Denim</h1>
+            <a href="#catalogo" class="hero-btn">Ver colección</a>
+        </div>
+    </section>
+
+    <!-- Filtros rápidos -->
+    <div class="categories-bar" id="catalogo">
+        <button class="cat-pill active" onclick="setCategory('all', this)">Ver todo</button>
+        <button class="cat-pill" onclick="setCategory('cazadoras', this)">Cazadoras & Abrigos</button>
+        <button class="cat-pill" onclick="setCategory('jeans', this)">Jeans & Cargo</button>
+        <button class="cat-pill" onclick="setCategory('sudaderas', this)">Sudaderas</button>
+        <button class="cat-pill" onclick="setCategory('calzado', this)">Zapatillas</button>
+    </div>
+
+    <!-- Título de sección -->
+    <div class="section-header">
+        <h2>Selección Hombre</h2>
+        <span class="item-count" id="productCounter">8 artículos</span>
+    </div>
+
+    <!-- Cuadrícula de Productos -->
+    <main class="product-grid" id="productGrid">
+        <!-- Los productos se cargan dinámicamente con JS -->
+    </main>
+
+    <!-- Sección Editorial -->
+    <section class="editorial-split">
+        <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=1000&q=80" alt="Editorial Lucía López">
+        <div class="editorial-text">
+            <span class="hero-tag">Capsule Collection</span>
+            <h3>Oversize Essentials</h3>
+            <p>Cortes relajados, tejidos pesados de algodón orgánico y siluetas inspiradas en la cultura urbana contemporánea. Diseñado por Lucía López.</p>
+            <a href="#catalogo" class="hero-btn">Explorar cápsula</a>
+        </div>
+    </section>
+
+    <!-- Carrito Lateral -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <span>Tu Cesta</span>
+            <button class="icon-btn" onclick="toggleCart()">Cerrar ✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p style="font-size: 12px; color: #777;">Tu cesta está vacía.</p>
+        </div>
+        <div class="cart-footer">
+            <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 13px;">
+                <span>TOTAL</span>
+                <span id="cartTotal">0,00 €</span>
+            </div>
+            <button class="checkout-btn" onclick="alert('Procesando pedido en Lucía López Store...')">Tramitar pedido</button>
+        </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Ayuda</h4>
+                <ul>
+                    <li><a href="#">Comprar online</a></li>
+                    <li><a href="#">Pago y envíos</a></li>
+                    <li><a href="#">Devoluciones</a></li>
+                    <li><a href="#">Guía de tallas</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Lucía López</h4>
+                <ul>
+                    <li><a href="#">Sobre la marca</a></li>
+                    <li><a href="#">Sostenibilidad</a></li>
+                    <li><a href="#">Trabaja con nosotros</a></li>
+                    <li><a href="#">Tiendas</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Síguenos</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">TikTok</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Spotify</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p style="font-size: 12px; color: #555; margin-bottom: 12px;">Suscríbete y obtén un 10% de descuento en tu primera compra.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte a Lucía López!');">
+                    <input type="email" placeholder="Introduce tu e-mail" required>
+                    <button type="submit" class="icon-btn">→</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 LUCÍA LÓPEZ. Todos los derechos reservados.</span>
+            <span>Política de privacidad · Condiciones de compra · Cookies</span>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                title: "Cazadora efecto piel boxy fit",
+                price: 49.99,
+                category: "cazadoras",
+                isNew: true,
+                img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 2,
+                title: "Jeans baggy cargo lavado ácido",
+                price: 39.99,
+                category: "jeans",
+                isNew: true,
+                img: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 3,
+                title: "Sudadera capucha gráfico espalda",
+                price: 29.99,
+                category: "sudaderas",
+                isNew: false,
+                img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 4,
+                title: "Zapatillas volumen skate monocromo",
+                price: 45.99,
+                category: "calzado",
+                isNew: true,
+                img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 5,
+                title: "Bomber nylon técnico oversize",
+                price: 55.99,
+                category: "cazadoras",
+                isNew: false,
+                img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 6,
+                title: "Pantalón parachute multipockets",
+                price: 35.99,
+                category: "jeans",
+                isNew: false,
+                img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 7,
+                title: "Sudadera cuello redondo heavy cotton",
+                price: 25.99,
+                category: "sudaderas",
+                isNew: true,
+                img: "https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 8,
+                title: "Botines track suela dentada",
+                price: 59.99,
+                category: "calzado",
+                isNew: false,
+                img: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=80"
+            }
+        ];
+
+        let currentCategory = 'all';
+        let cart = [];
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            
+            const filtered = products.filter(p => {
+                const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.title.toLowerCase().includes(search);
+                return matchesCat && matchesSearch;
+            });
+
+            document.getElementById('productCounter').textContent = `${filtered.length} artículos`;
+
+            grid.innerHTML = filtered.map(product => `
+                <article class="product-card">
+                    <div class="product-img-wrapper">
+                        ${product.isNew ? '<span class="badge-new">New</span>' : ''}
+                        <img src="${product.img}" alt="${product.title}" loading="lazy">
+                        <button class="quick-add" onclick="addToCart(${product.id})">+ Añadir talla M</button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <span class="product-price">${product.price.toFixed(2).replace('.', ',')} €</span>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function setCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-pill').forEach(el => el.classList.remove('active'));
+            btn.classList.add('active');
+            renderProducts();
+        }
+
+        function filterProducts() {
+            renderProducts();
+        }
+
+        function addToCart(id) {
+            const item = products.find(p => p.id === id);
+            cart.push(item);
+            updateCartUI();
+            toggleCart(true);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').textContent = cart.length;
+            const cartItemsEl = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = '<p style="font-size: 12px; color: #777;">Tu cesta está vacía.</p>';
+                document.getElementById('cartTotal').textContent = '0,00 €';
+                return;
+            }
+
+            let total = 0;
+            cartItemsEl.innerHTML = cart.map((item, index) => {
+                total += item.price;
+                return `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.title}">
+                        <div class="cart-item-details">
+                            <div style="font-weight: 500; margin-bottom: 4px;">${item.title}</div>
+                            <div style="color: #777; margin-bottom: 6px;">Talla: M</div>
+                            <div style="font-weight: 700;">${item.price.toFixed(2).replace('.', ',')} €</div>
+                        </div>
+                        <button class="icon-btn" onclick="removeFromCart(${index})" style="align-self: flex-start;">✕</button>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('cartTotal').textContent = total.toFixed(2).replace('.', ',') + ' €';
+        }
+
+        function toggleCart(forceOpen = null) {
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('cartOverlay');
+            const isOpen = forceOpen !== null ? forceOpen : !drawer.classList.contains('open');
+            
+            if (isOpen) {
+                drawer.classList.add('open');
+                overlay.style.display = 'block';
+            } else {
+                drawer.classList.remove('open');
+                overlay.style.display = 'none';
+            }
+        }
+
+        // Inicializar tienda
+        renderProducts();
+    </script>
 </body>
 </html>
